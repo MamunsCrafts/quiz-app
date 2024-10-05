@@ -27,7 +27,11 @@ const SignUpForm = () => {
         title: "Success!",
         text: "Congratulations! Your account has been created.",
         icon: "success",
-      });
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/login';
+        }
+      })
     }
 
     // Save the form data in localStorage
