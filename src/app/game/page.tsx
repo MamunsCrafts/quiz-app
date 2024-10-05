@@ -22,6 +22,7 @@ export default function Game() {
     };
 
     useEffect(() => {
+        console.log("loggedIn===",window.localStorage.getItem('isLoggedIn'))
         if(!window.localStorage.getItem('isLoggedIn')){
             window.location.href='/login'
         }

@@ -21,7 +21,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
 
   const handleClick = () => {
   //  router.push(`/quiz/${subject.name.toLowerCase()}`);
-  console.log(window.localStorage.getItem('isLoggedIn'))
+  console.log("loggedIn===",window.localStorage.getItem('isLoggedIn'))
   if(window.localStorage.getItem('isLoggedIn'))
   router.push('/game')
   else {
