@@ -95,7 +95,7 @@ const SignIn: React.FC = () => {
               </button>
               <p className="text-sm font-light  text-gray-400">
                 Don’t have an account yet?{' '}
-                <a href="/registration" className="font-medium text-primary-600 hover:underline text-primary-500">
+                <a href="/registration" className="font-semibold text-primary-600 text-blue-700 hover:underline ">
                   Sign up
                 </a>
               </p>
