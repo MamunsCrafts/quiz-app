@@ -83,13 +83,13 @@ const SignIn: React.FC = () => {
                     <label htmlFor="remember" className=" text-gray-300">Remember me</label>
                   </div>
                 </div>
-                <a href="#" className="text-sm font-medium text-primary-600 hover:underline text-primary-500">
+                <a href="#" className="text-sm font-medium text-primary-600 hover:underline text-white">
                   Forgot password?
                 </a>
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800"
+                className="w-full ring-2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800"
               >
                 Sign in
               </button>
