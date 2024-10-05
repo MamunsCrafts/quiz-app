@@ -22,7 +22,7 @@ export default function Game() {
     };
 
     useEffect(() => {
-        if(window.localStorage.getItem('isLoggedIn')==''){
+        if(!window.localStorage.getItem('isLoggedIn')){
             window.location.href='/login'
         }
         setIsMounted(true); // Set to true when the component mounts

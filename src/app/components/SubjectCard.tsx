@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { use } from 'react';
 import Swal from 'sweetalert2';
 
 // Define the interface for the subject prop
@@ -20,7 +21,8 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
 
   const handleClick = () => {
   //  router.push(`/quiz/${subject.name.toLowerCase()}`);
-  if(window.localStorage.getItem('isLoggedIn')!=='')
+  console.log(window.localStorage.getItem('isLoggedIn'))
+  if(window.localStorage.getItem('isLoggedIn'))
   router.push('/game')
   else {
     Swal.fire({
@@ -34,6 +36,8 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
     })
   }
   };
+
+  
 
   return (
     <div
