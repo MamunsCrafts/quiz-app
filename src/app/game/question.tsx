@@ -24,13 +24,14 @@ export default function Questions({ mcq, timeLeft }: QuestionsProps) {
     // Function to save the answer both in state and in localStorage
     const givenAnswer = (ans: string) => {
         setAnswer(ans);
-        localStorage.setItem(`answer-${mcq.question}`, ans.toString());
+        const email = localStorage.getItem('email');
+        localStorage.setItem(`answer-${mcq.question}-${email}`, ans.toString());
     }
 
     // Retrieve the answer from localStorage when the component mounts or when the question changes
     useEffect(() => {
-    
-        const savedAnswer = localStorage.getItem(`answer-${mcq.question}`);
+        const email = localStorage.getItem('email');
+        const savedAnswer = localStorage.getItem(`answer-${mcq.question}-${email}`);
         if (savedAnswer) {
             setAnswer(savedAnswer);
         } else {
