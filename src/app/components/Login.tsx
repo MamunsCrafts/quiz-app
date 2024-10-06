@@ -16,7 +16,7 @@ const SignIn: React.FC = () => {
     window.localStorage.setItem('isLoggedIn', email);
     const role = window.localStorage.getItem('user')||""
     // const isAdmin = JSON.parse(role)?.isAdmin
-    if(email ===window.localStorage.getItem('email') && password ===window.localStorage.getItem('password')&&(email===JSON.parse(role)?.email)){
+    if(email ===window.localStorage.getItem('email') && password ===window.localStorage.getItem('password')&&(email===JSON.parse(role)?.email) && JSON.parse(role)?.isAdmin === true){
       login(email,true)
       router.push('/questions-upload')
     }

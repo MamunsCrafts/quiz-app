@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
 
 const Navbar: React.FC = ({isChange}:any) => {
@@ -9,6 +9,23 @@ const Navbar: React.FC = ({isChange}:any) => {
     const toggleMenu = () => {
         setIsOpen((prev) => !prev);
     };
+    useEffect(()=>{
+        let user = window.localStorage.getItem('user');
+        let email = window.localStorage.getItem('email')||"";
+        let isLoggedIn = window.localStorage.getItem('isLoggedIn');
+        let loggedInUser = JSON.parse(user || '{}');
+
+        if(loggedInUser?.isAdmin === true && isLoggedIn ===loggedInUser?.email){
+            login(email,true)
+            
+        }
+        else if(isLoggedIn ===loggedInUser?.email ){console.log("debug 2")
+
+            login(email,false)
+        }
+        
+
+    },[])
     
     const handleLogout=()=>{
         window.localStorage.removeItem('isLoggedIn');
