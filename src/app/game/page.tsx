@@ -4,6 +4,8 @@ import { gkQuestions } from "../../../gk";
 import Questions from "./question";
 import Confetti from 'react-confetti'; // Import Confetti
 import useWindowSize from 'react-use/lib/useWindowSize'
+import Swal from "sweetalert2";
+import { useAuth } from "../components/AuthContext";
 export default function Game() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isMounted, setIsMounted] = useState(false); // State to track component mount status
@@ -11,7 +13,18 @@ export default function Game() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false); // State to show confetti
     const { width, height } = useWindowSize(); // Get window size for confetti
+ const [gkQuestion, setGkQuestion] = useState<any>(gkQuestions);
+     useEffect(()=>{
+      const ques =window.localStorage.getItem('questions') 
+      if(ques){
+        let JsonQuestions = JSON.parse(ques)
+        JsonQuestions = [...JsonQuestions,...gkQuestions]
+        console.table(JsonQuestions)
+        setGkQuestion(JsonQuestions);
+      }
 
+
+    },[])
     // To play audio
     const playAudio = () => {
         if (audioRef.current) {
@@ -22,7 +35,6 @@ export default function Game() {
     };
 
     useEffect(() => {
-        console.log("loggedIn===",window.localStorage.getItem('isLoggedIn'))
         if(!window.localStorage.getItem('isLoggedIn')){
             window.location.href='/login'
         }
@@ -65,18 +77,45 @@ export default function Game() {
     };
 
     const nextQuestion = () => {
-        if (currentIndex < 9) {
+        if (currentIndex < gkQuestion.length - 1) {
             setCurrentIndex(currentIndex + 1);
             setTimeLeft(10); // Reset timer for the next question
             playAudio(); // Play audio for the next question
         }
     };
-
+    const {gainedPoints} = useAuth();
+    const deleteAnswerKeysFromLocalStorage = () => {
+        const pattern = "answer";
+        const keysToDelete = [];
+    
+        // Collect keys to delete
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(pattern)) {
+                keysToDelete.push(key);
+            }
+        }
+    
+        // Delete collected keys
+        keysToDelete.forEach(key => localStorage.removeItem(key));
+    };
+    
     const handleSubmit = () => {
         setShowConfetti(true); // Show confetti on submit
-        setTimeout(() => setShowConfetti(false), 5000); // Hide after 5 seconds
+        setTimeout(() => setShowConfetti(false), 10000); // Hide after 5 seconds
+        Swal.fire({
+            title: `${gainedPoints > 30 ? 'Congratulations!' : 'Better luck next time!'}`,
+            text: `Your Score: ${gainedPoints}/100`,
+            icon: `${gainedPoints>30?'success':'error'}`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteAnswerKeysFromLocalStorage();
+                window.location.href = '/'; 
+            }
+        })
     };
 
+    console.log(gkQuestion)
     return (
         <div>
             {isMounted && ( // Render audio only when mounted
@@ -88,7 +127,7 @@ export default function Game() {
             {showConfetti && ( // Render Confetti
                 <Confetti width={width} height={height} />
             )}
-            <Questions mcq={gkQuestions[currentIndex]} timeLeft={timeLeft} />
+            <Questions mcq={gkQuestion[currentIndex]} timeLeft={timeLeft} />
             <div className="flex items-center justify-center">
                 <button 
                     type="button" 
@@ -98,7 +137,7 @@ export default function Game() {
                     Prev
                 </button>
 
-                {currentIndex !== gkQuestions.length - 1 ? (
+                {currentIndex !== gkQuestion.length - 1 ? (
                     <button 
                         type="button" 
                         onClick={nextQuestion} 

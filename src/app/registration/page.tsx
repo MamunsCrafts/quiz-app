@@ -9,7 +9,25 @@ const SignUpForm = () => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [acceptedTerms, setAcceptedTerms] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
+
+  const handleAdmin = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAdmin(e.target.checked);
+    Swal.fire({
+      title: "Warning!",
+      text: "Dummy Permission",
+      icon: "warning",
+    }).then((res)=>{
+      if(res.isConfirmed){
+        setIsAdmin(e.target.checked);
+      }
+      else{
+        setIsAdmin(false);
+      }
+    })
+    
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -29,6 +47,7 @@ const SignUpForm = () => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
+          
           window.location.href = '/login';
         }
       })
@@ -38,7 +57,7 @@ const SignUpForm = () => {
     localStorage.setItem('email', email);
     localStorage.setItem('password', password); // Storing password in localStorage is generally not recommended!
     localStorage.setItem('acceptedTerms', JSON.stringify(acceptedTerms));
-
+    localStorage.setItem('user', JSON.stringify({ email, isAdmin }));
     // Example action upon successful form submission
     console.log('Data saved in localStorage:', {
       email,
@@ -118,6 +137,27 @@ const SignUpForm = () => {
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
+                    id="isAdmin"
+                    aria-describedby="terms"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 :bg-gray-700 :border-gray-600 :focus:ring-primary-600 :ring-offset-gray-800"
+                    checked={isAdmin}
+                    onChange={(e)=>handleAdmin(e)}
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label
+                    htmlFor="terms"
+                    className="font-light text-gray-300"
+                  >
+                    I wanna be  an admin
+                    
+                  </label>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
                     id="terms"
                     aria-describedby="terms"
                     type="checkbox"
@@ -135,7 +175,7 @@ const SignUpForm = () => {
                     I accept the{" "}
                     <a
                       className="font-medium text-primary-600 hover:underline :text-primary-500"
-                      href="#"
+                      href=""
                     >
                       Terms and Conditions
                     </a>

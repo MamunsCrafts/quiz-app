@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
+import { useAuth } from "../components/AuthContext";
 
 // Define the shape of the question object
 interface Question {
@@ -10,6 +11,7 @@ interface Question {
     c: string;
     d: string;
   };
+  answer: string;
 }
 
 interface QuestionsProps {
@@ -20,10 +22,12 @@ interface QuestionsProps {
 
 export default function Questions({ mcq, timeLeft }: QuestionsProps) {
     const [answer, setAnswer] = useState<String>(""); 
+    const {addedScore} = useAuth();
 
-    // Function to save the answer both in state and in localStorage
+    // Function to save the ,answer both in state and in localStorage
     const givenAnswer = (ans: string) => {
         setAnswer(ans);
+        addedScore(mcq?.options[mcq.answer as keyof typeof mcq.options]===answer?10:0); 
         const email = localStorage.getItem('email');
         localStorage.setItem(`answer-${mcq.question}-${email}`, ans.toString());
     }

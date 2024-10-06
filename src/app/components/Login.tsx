@@ -14,9 +14,14 @@ const SignIn: React.FC = () => {
     const password = formData.get('password') as string;
     const remember = formData.get('remember') as string;
     window.localStorage.setItem('isLoggedIn', email);
-   
-    if(email ===window.localStorage.getItem('email') && password ===window.localStorage.getItem('password')){
-      login(email)
+    const role = window.localStorage.getItem('user')||""
+    // const isAdmin = JSON.parse(role)?.isAdmin
+    if(email ===window.localStorage.getItem('email') && password ===window.localStorage.getItem('password')&&(email===JSON.parse(role)?.email)){
+      login(email,true)
+      router.push('/questions-upload')
+    }
+    else if(email ===window.localStorage.getItem('email') && password ===window.localStorage.getItem('password')){
+      login(email,false)
         router.push('/game')
     }
     else {

@@ -5,8 +5,12 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 interface AuthContextType {
   isLoggedIn: string;  // 'true' or 'false'
   user: string | null;
-  login: (username: string) => void;
+  login: (username: string,isAdmin:boolean) => void;
   logout: () => void;
+  isAdmin : boolean;
+  gainedPoints: number;
+  addedScore: (points: number) => void;
+  setIsAdmin: (isAdmin: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,10 +30,13 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<string>(''); 
   const [user, setUser] = useState<string | null>(null);
-
-  const login = (email: string) => {
+  const [gainedPoints, setGainedPoints] = useState<number>(0);
+ const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const login = (email: string,isAdmin:boolean) => {
     setUser(email);
+    setIsAdmin(isAdmin);
     setIsLoggedIn(email);
+
     localStorage.setItem('isLoggedIn', email);
   };
 
@@ -39,8 +46,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.setItem('isLoggedIn', '');
   };
 
+  const addedScore = (points: number) => {
+    setGainedPoints((prevPoints) => prevPoints + points);
+  }
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout,addedScore,gainedPoints,isAdmin ,setIsAdmin}}>
       {children}
     </AuthContext.Provider>
   );
