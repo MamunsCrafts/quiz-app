@@ -59,11 +59,7 @@ const SignUpForm = () => {
     localStorage.setItem('acceptedTerms', JSON.stringify(acceptedTerms));
     localStorage.setItem('user', JSON.stringify({ email, isAdmin }));
     // Example action upon successful form submission
-    console.log('Data saved in localStorage:', {
-      email,
-      password,
-      acceptedTerms,
-    });
+   
   };
 
   return (

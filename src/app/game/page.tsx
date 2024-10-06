@@ -19,7 +19,7 @@ export default function Game() {
       if(ques){
         let JsonQuestions = JSON.parse(ques)
         JsonQuestions = [...JsonQuestions,...gkQuestions]
-        console.table(JsonQuestions)
+        
         setGkQuestion(JsonQuestions);
       }
 
@@ -115,7 +115,7 @@ export default function Game() {
         })
     };
 
-    console.log(gkQuestion)
+ 
     return (
         <div>
             {isMounted && ( // Render audio only when mounted

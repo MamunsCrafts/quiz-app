@@ -13,7 +13,7 @@ export default function Home() {
       if (response.ok) {
         const data = await response.json();
         setSubjects(data.subjects);
-        console.log(data);
+        
       } else {
         console.error("Failed to fetch subjects");
       }

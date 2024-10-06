@@ -27,7 +27,8 @@ export default function Questions({ mcq, timeLeft }: QuestionsProps) {
     // Function to save the ,answer both in state and in localStorage
     const givenAnswer = (ans: string) => {
         setAnswer(ans);
-        addedScore(mcq?.options[mcq.answer as keyof typeof mcq.options]===answer?10:0); 
+        // console.log("========",mcq?.options[mcq.answer as keyof typeof mcq.options],"==", ans);
+        addedScore(mcq?.options[mcq.answer as keyof typeof mcq.options]===ans?10:0); 
         const email = localStorage.getItem('email');
         localStorage.setItem(`answer-${mcq.question}-${email}`, ans.toString());
     }
