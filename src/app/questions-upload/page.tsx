@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-interface Question {
+export interface Question {
     question: string;
     
       a: string;
@@ -16,7 +16,7 @@ interface Question {
 export default function QuestionsUpload() {
     useEffect(()=>{
         let user = window.localStorage.getItem('user');
-        let email = window.localStorage.getItem('email');
+        let email = window.localStorage.getItem('isLoggedIn');
         let loggedInUser = JSON.parse(user || '{}');
 
         if(loggedInUser?.isAdmin === true && email ===loggedInUser?.email){
@@ -59,7 +59,7 @@ export default function QuestionsUpload() {
         icon: "success",
         }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '/';
+            window.location.href = '/questions';
         }
     })
      

@@ -6,6 +6,7 @@ import Confetti from 'react-confetti'; // Import Confetti
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Swal from "sweetalert2";
 import { useAuth } from "../components/AuthContext";
+import toast from "react-hot-toast";
 export default function Game() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isMounted, setIsMounted] = useState(false); // State to track component mount status
@@ -35,9 +36,24 @@ export default function Game() {
     };
 
     useEffect(() => {
-        if(!window.localStorage.getItem('isLoggedIn')){
-            window.location.href='/login'
+        let user = window.localStorage.getItem('user');
+        let email = window.localStorage.getItem('isLoggedIn');
+        let loggedInUser = JSON.parse(user || '{}');
+
+       
+         if(loggedInUser?.isAdmin === true && email ===loggedInUser?.email){
+             window.location.href='/questions'
+         }
+         else if(!window.localStorage.getItem('isLoggedIn')){
+            
+             window.location.href='/login'
         }
+        
+         else {
+            // window.location.href = '/login';
+             toast.error('You are not authorized to view this page');
+ 
+         }
         setIsMounted(true); // Set to true when the component mounts
     }, []);
 

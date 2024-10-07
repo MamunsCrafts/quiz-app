@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quiz Mela Application 
 
-## Getting Started
+## Project Home
+![Project Home](/public/quiz/home.png) 
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Registration Page
+![Registration](/public/quiz/registration.png) 
+
+
+## Registration Success
+![Reg Success](/public/quiz/success-reg.png) 
+
+
+## Login 
+![Login](/public/quiz/login.png) 
+
+## As a admin question upload section 
+![Upload](/public/quiz/question-upload.png) 
+
+
+## As a admin question list section 
+
+### Question can edit and delete 
+![Update and Delete](/public/quiz/question-list.png) 
+
+###  Game Play Section 
+![Update and Delete](/public/quiz/game-play.png) 
+
+## Result Section
+![Project Home](/public/quiz/game-finish.png) 
+
+
+
+# Quiz Mela App Description
+
+**Quiz Mela** is an interactive quiz application designed to engage users in a fun and educational way. It provides a platform for users to participate in various quizzes across different subjects and difficulty levels. The app features a user-friendly interface that allows users to easily register, log in, and navigate through the available quizzes.
+
+## Key Features
+
+1. **User Registration and Login:** 
+   - Users can create an account to access the app, ensuring a personalized experience where they can track their progress and achievements.
+
+2. **Quiz Participation:** 
+   - Users can participate in quizzes, testing their knowledge and skills on a variety of topics. Each quiz is designed to challenge and enhance users' understanding of the subject matter.
+
+3. **Admin Controls:** 
+   - Admins have robust control over the content within the app. They can:
+     - **Upload Questions:** Easily add new questions to the database, ensuring a continuous supply of fresh content.
+     - **Edit Questions:** Modify existing questions to improve clarity or accuracy.
+     - **Delete Questions:** Remove outdated or irrelevant questions, maintaining the quality of quizzes.
+
+4. **Engaging Experience:** 
+   - The app aims to provide an enjoyable and competitive environment, encouraging users to learn while having fun.
+
+With its blend of user engagement and administrative flexibility, **Quiz Mela** serves as a comprehensive solution for both quiz enthusiasts and administrators alike. Whether you're looking to test your knowledge or manage a quiz database, **Quiz Mela** is the perfect platform for you.
+
+
+
+### Run Instruction
+## Development Mode:
 ```
+npm run dev or yarn dev
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+## Build for Production:
+```
+npm run build or yarn build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+### Start Production Server:
+```
+npm start or yarn start
+```
+### Run Linting (if you have ESLint configured):
+```
+npm run lint or yarn lint
+```
